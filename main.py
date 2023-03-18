@@ -18,7 +18,17 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    car.create_car()
     car.move()
 
     if tim.is_at_finishline():
         score.level_increment()
+        car.increase_speed()
+
+    for _ in car.all_cars:
+        if _.distance(tim) < 20:
+            score.game_over()
+            game_is_on = False
+
+screen.exitonclick()
+
